@@ -1,0 +1,21 @@
+<div id="footer" style="position: absolute; width: 100%; left: 0; top: 0; z-index: 1; text-align: center;">
+    <script>
+        function positionFooter() {
+            var height1 = $( "body" ).height();
+            var height2 = $( window ).height();
+
+            var height = Math.max(height1, height2) - 22;
+
+            $("#footer").css("margin-top", (height) + "px");
+            setTimeout(positionFooter, 2000);
+        }
+        positionFooter();
+    </script>
+    {% block footer %}
+        <div style="text-align: center;">
+            <div style="display: inline-block"><a href="/imprint/"><div style="background-color: white; font-size:12px; padding: 2px; color: black; display: inline-block;">Imprint</div></a></div>
+            <div style="display: inline-block"><a href="/about/"><div style="background-color: white; font-size:12px; padding: 2px; color: black; display: inline-block;">About</div></a></div>
+            <div style="display: inline-block"><a href="/contact/"><div style="background-color: white; font-size:12px; padding: 2px; color: black; display: inline-block;">Contact</div></a></div>
+        </div>
+    {% endblock %}
+</div>

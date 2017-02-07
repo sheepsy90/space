@@ -1,0 +1,288 @@
+{% extends "general/parent_template.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block include %}
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_mission.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="ongoing_mission">
+        <div id="controls">
+            <div id="mission_controls">
+                <div class="control_buttons">
+                    {%  if is_leader %}
+                        <a id="start_mission_button" href="/start_mission/">Start</a>
+                    {%  endif %}
+                    <a id="leave_mission_button" href="/leave_mission/">Leave</a>
+                </div>
+                <div id="started" style="display: none">{% if mission_details.mission_instance.started == None %}0{% else %}1{% endif %}</div>
+                <div id="finished" style="display: none">
+                    Reward Page
+                </div>
+                <div id="mission_time" style="display: none">Mission Time left: <span id="time_left"></span> s.</div>
+            </div>
+            <div id="actionPointsContainer">
+                {%  for skill in skill_categories %}
+                    <div class="{{ skill.name|slice:":3"}}">
+                        <div class="amount" id="leftovers_{{ skill.id }}"></div>
+                    </div>
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+            <div id="users">
+                {% for element in mission_details.open_mission_elements %}
+                    <div class="user" id="user_{{element.user.id}}">{{ element.user.username }}</div>
+                {% endfor %}
+            </div>
+            <div id="status" style="border: 1px solid;">
+                <div id="status" style="text-align: left">
+                    <div style="display: inline; width: 50%; float: left;">
+                        <img id="ship_status_img" src="/static/img/status_ship.png" style="width: 100%; height: auto; float: left;"/>
+                        <div id="status_0" style="width: 100%; height: auto; background-color: green;" ></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div style="display: inline; width: 50%;  float: left;">
+                        <img id="crew_status_img" src="/static/img/crew_status.png" style="width: 100%; height: auto; float: left;"/>
+                        <div id="status_1" style="width: 100%; height: auto; background-color: green;" ></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div id="events"></div>
+        <div class="clear"></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<div id="csrf_token_container">{% csrf_token %}</div>
+<script>
+
+    var polling_method;
+    var poll_party_members_method;
+
+    // A $( document ).ready() block.
+    $( document ).ready(function() {
+
+        if ($("#started").html() == 1){
+            postPollEvents();
+            polling_method = setInterval(postPollEvents, 500);
+            $("#mission_time").show();
+            $(".control_buttons").hide();
+        }else{
+            poll_party_members_method = setInterval(poll_party_members_and_game_started, 500);
+        }
+
+        $("#footer > div").css("text-align", "left");
+        start_and_bind_audio();
+        start_bg_switcher();
+        update_ship_status(0);
+        update_crew_status(0);
+
+        $("#finished").bind("click", function(){
+            window.location.href = "/complete_mission"
+        })
+
+    });
+
+    function get_csrftoken(){
+       return $("#csrf_token_container > input").val();
+    }
+
+
+    function postPollEvents(){
+        $.ajax({
+          type: "POST",
+          url: "/poll_events/",
+          data: {csrfmiddlewaretoken: get_csrftoken()}
+        }).done(function( data ) {
+            updateEventList(data);
+        });
+    }
+
+
+    function add_to_event_list(id, name, desc, occurred, needs){
+        var eventContainer = $("<div></div>");
+        eventContainer.hide();
+        eventContainer.attr("id", "event_" + id);
+        eventContainer.addClass("eventContainer");
+
+        var event_info = $("<div></div>");
+        event_info.html("<div class='eventDescription'>" + desc + " (" + occurred + ")");
+        event_info.addClass("eventInfo");
+        eventContainer.append(event_info);
+
+        var remaining_time = $("<div><span class='remainingTimeSpan'></span></div>");
+        remaining_time.html();
+        remaining_time.addClass("remaining_act_time");
+        eventContainer.append(remaining_time);
+
+        var work_on = $("<div></div>");
+        work_on.addClass("work_on_button");
+        $(work_on).bind("click", function(){
+            handle_work_on(id)
+        });
+        eventContainer.append(work_on);
+
+        var need_container = $("<div></div>");
+        need_container.addClass("needContainer");
+        eventContainer.append(need_container);
+
+        for(e in needs){
+            var need = $("<div></div>");
+            var need_id = needs[e]["id"];
+            var need_amount = needs[e]["amount"];
+            need.html("<div class='amount'>" + need_amount + "</div>");
+            need.addClass("N0" + need_id);
+            need_container.append(need);
+        }
+
+        var clear = $("<div></div>");
+        clear.addClass("clear");
+        eventContainer.append(clear);
+
+        $("#events").prepend(eventContainer);
+        $("#event_" + id).show(1000);
+
+    }
+
+    function update_event_if_state_changed(id, event_happened, event_prevented, event_remain_time){
+        if (event_happened){
+            $("#event_" + id).addClass("eventHappened");
+        }
+        if (event_prevented){
+            $("#event_" + id).addClass("eventPrevented");
+        }
+
+        if (event_remain_time < 9){
+            event_remain_time = "0" + event_remain_time;
+        }
+        $("#event_" + id + " > .remaining_act_time > .remainingTimeSpan").html(event_remain_time);
+    }
+
+    function handle_work_on(id){
+        $.ajax({
+          type: "POST",
+          url: "/handle_event/" + id + "/",
+          data: {csrfmiddlewaretoken: get_csrftoken()}
+        }).done(function( data ) {
+            work_on_response(data);
+        });
+    }
+
+    function work_on_response(data){
+
+    }
+
+    function handle_death() {
+        window.location.href = "/complete_mission"
+    }
+
+
+    function updateEventList(data){
+        // Clear the event list
+        console.log(data);
+        for (e in data["data"]){
+            var element = data["data"][e];
+            var name = element["name"];
+            var desc = element["desc"];
+            var occurred = element["occurred"];
+
+            var event_happened = element["event_happened"];
+            var event_prevented = element["event_prevented"];
+            var event_remain_time = element["event_remain_time"];
+
+            var id = element["id"];
+
+            var needs = element["needs"];
+
+
+
+            if (!$("#event_"+id).length){
+                add_to_event_list(id, name, desc, occurred, needs);
+                play_sound("/static/music/alarm.mp3");
+            }
+            update_event_if_state_changed(id, event_happened, event_prevented, event_remain_time);
+
+
+        }
+
+        if(data["finished"]){
+            $("#finished").attr("style", "display: block");
+             window.clearInterval(polling_method);
+            $("#mission_time").hide();
+        }
+
+        $("#time_left").html(data["time_left"]);
+        var leftovers = data["user_leftovers"];
+        for (e in leftovers){
+            $("#leftovers_" + e).html(leftovers[e]);
+        }
+
+        for (e in data["status"]){
+            if (e == 0){
+                update_ship_status(data["status"][e])
+            }
+            if (e == 1){
+                update_crew_status(data["status"][e])
+            }
+        }
+        if(data["status"]["death"]){
+            handle_death();
+        }
+
+
+    }
+
+    function post_poll_party_members_and_game_started(data){
+        $("#users").find(".user").addClass("marked");
+
+        for(e in data["data"]){
+            var user_id = data["data"][e]["id"];
+            var username = data["data"][e]["name"];
+
+            if (!$("#user_" + user_id).length){
+                $("#users").append($("<div class='user' id='user_" + user_id + "'>" + username + "</div>"))
+            }else{
+                $("#user_" + user_id).removeClass("marked");
+            }
+        }
+        $("#users").find(".marked").remove();
+
+        if(data["game_started"]){
+            window. location.reload();
+        }
+
+    }
+
+    function poll_party_members_and_game_started(){
+        $.ajax({
+          type: "POST",
+          url: "/poll_party_members/",
+          data: {csrfmiddlewaretoken: get_csrftoken()}
+        }).done(function( data ) {
+            post_poll_party_members_and_game_started(data);
+        });
+    }
+
+    function update_ship_status(damage){
+        var height = $("#ship_status_img").css("height");
+        var x =  100 - damage;
+        $("#status_0").css("width", x + "%").css("height", height);
+    }
+
+
+    function update_crew_status(damage){
+        var height = $("#crew_status_img").css("height");
+        var height_int = parseInt(height.substring(0, height.length-2));
+        var x =  height_int * ((100-damage) / 100.0);
+        var x = Math.max(0, x);
+        $("#status_1").css("height", x + "px").css("margin-top", (height_int - x) + "px");
+    }
+
+</script>
+{% endblock %}

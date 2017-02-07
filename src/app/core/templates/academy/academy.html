@@ -1,0 +1,93 @@
+{% extends "general/parent_template.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block include %}
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_academy.css" />
+    <link rel="stylesheet" media='(min-width: 801px)' href="{{STATIC_PREFIX}}css/_academy_normal.css" />
+    <link rel="stylesheet" media='(min-width: 401px) and (max-width: 800px)' href="{{STATIC_PREFIX}}css/_academy_medium.css" />
+    <link rel="stylesheet" media='(max-width: 400px)' href="{{STATIC_PREFIX}}css/_academy_small.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="academy_overview">
+        <div style="margin-top: 8px;">
+            {% if academy_offers|length > 0 %}
+                <table>
+                    <thead>
+                        <td>Programm</td>
+                        <td class="description">Description</td>
+                        <td class="reward">Reward</td>
+                        <td>Costs</td>
+                    </thead>
+                    {%  for entry in academy_offers %}
+                        {% cycle 'even' 'odd' as rowcolors silent %}
+                        <tr class="entry {{ rowcolors }}">
+                            <td>{{ entry.name }}</td>
+                            <td class="description">{{ entry.desc }}</td>
+                            <td class="reward">
+                                {%  for reward in entry.get_reward_list %}
+                                    <div class="{{reward.name|slice:"0:3"}}">
+                                        <div class="amount">{{ reward.amount }}</div>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                            <td>{{ entry.cost }}</td>
+                            <td>
+                                <div class="enter_program_btn" id="enter_program_btn_{{ entry.id }}" onclick="handle_enter_program({{ entry.id }})">Join</div>
+                            </td>
+                        </tr>
+                    {%  endfor %}
+                </table>
+            {% else %}
+                <div style="text-align: center">
+                    <div style="display: inline-block; padding: 10px; background-color: white; border: 1px solid; font-weight: bold;">No offers</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <div id="csrf_token_container">{% csrf_token %}</div>
+    <script>
+        $(document).ready(function() {
+            $("#header_academy").addClass("active");
+            start_and_bind_audio();
+            start_bg_switcher();
+        });
+
+        function get_csrftoken(){
+            return $("#csrf_token_container > input").val();
+        }
+
+        function handle_can_join_answer(data, program_id) {
+            console.log(data, program_id);
+            if(data["success"]){
+                 $("#enter_program_btn_" + program_id).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+                     $("#enter_program_btn_" + program_id).css("backgroundColor", "#999");
+                 });
+                if(data["can_join"]){
+                    $("#enter_program_btn_" + program_id).css("backgroundColor", "green");
+                    window.location.href = "/enter_program/" + program_id + "/"
+                }else{
+                    $("#enter_program_btn_" + program_id).css("backgroundColor", "red");
+                }
+            }else{
+
+            }
+        }
+
+        function handle_enter_program(program_id){
+            $.ajax({
+              type: "POST",
+              url: "/can_join_program/",
+              data: {csrfmiddlewaretoken: get_csrftoken(), academy_program_id: program_id}
+            }).done(function( data ) {
+                handle_can_join_answer(data, program_id);
+            });
+        }
+    </script>
+{% endblock %}

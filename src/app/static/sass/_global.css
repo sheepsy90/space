@@ -1,0 +1,139 @@
+table {
+  width: 100%;
+  border: none !important;
+  background-color: grey; }
+
+table thead td {
+  background-color: grey;
+  color: black;
+  text-align: center;
+  border-bottom: 1px solid; }
+
+.bordered {
+  border: 1px solid; }
+
+.entry td {
+  text-align: center; }
+
+.even {
+  background-color: #444; }
+
+.odd {
+  background-color: #666; }
+
+body {
+  margin: 0px;
+  background-color: black;
+  background-repeat: repeat-y;
+  height: auto; }
+
+#header a {
+  margin: 0;
+  text-decoration: none;
+  color: black; }
+#header #header_academy, #header #header_planet {
+  width: 128px;
+  height: 32px;
+  float: left; }
+#header #header_academy {
+  background-image: url("/static/img/academy.png"); }
+  #header #header_academy:hover {
+    background-image: url("/static/img/academy_hover.png"); }
+#header #header_planet {
+  background-image: url("/static/img/planet.png"); }
+  #header #header_planet:hover {
+    background-image: url("/static/img/planet_hover.png"); }
+#header .header_element_controls {
+  display: inline-block;
+  float: right;
+  text-align: center; }
+  #header .header_element_controls .audio_symbol {
+    background-image: url("/static/img/audio.png");
+    width: 32px;
+    height: 32px;
+    float: right; }
+  #header .header_element_controls .settings {
+    background-image: url("/static/img/settings.png");
+    width: 32px;
+    height: 32px;
+    float: right; }
+  #header .header_element_controls .Earth, #header .header_element_controls .Mars {
+    width: 96px;
+    height: 32px;
+    float: right; }
+  #header .header_element_controls .Earth {
+    background-image: url("/static/img/LocationEarth.png"); }
+  #header .header_element_controls .Mars {
+    background-image: url("/static/img/LocationMars.png"); }
+  #header .header_element_controls .logout {
+    background-image: url("/static/img/logout.png");
+    width: 32px;
+    height: 32px;
+    float: right; }
+  #header .header_element_controls .muted {
+    background-image: url("/static/img/audio_mute.png"); }
+
+.userinfo {
+  border: 1px solid;
+  margin-top: 2px;
+  font-size: 0px;
+  padding: 5px; }
+
+.userinfo .detail {
+  display: inline-block;
+  font-size: 14px;
+  text-align: center; }
+
+#level, #name {
+  width: 20%; }
+
+#abilities {
+  width: 60%; }
+
+#abilities .PHY, #abilities .BIO, #abilities .CHE, #abilities .GEO, #abilities .ENG, #abilities .INF, #abilities .MED, #abilities .NAV {
+  display: inline-block;
+  width: 32px;
+  height: 32px; }
+  #abilities .PHY .amount, #abilities .BIO .amount, #abilities .CHE .amount, #abilities .GEO .amount, #abilities .ENG .amount, #abilities .INF .amount, #abilities .MED .amount, #abilities .NAV .amount {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: bold; }
+#abilities .PHY {
+  background-image: url("/static/img/physics_sym.png"); }
+#abilities .BIO {
+  background-image: url("/static/img/biology_sym.png"); }
+#abilities .CHE {
+  background-image: url("/static/img/chemistry_sym.png"); }
+#abilities .GEO {
+  background-image: url("/static/img/geology_sym.png"); }
+#abilities .ENG {
+  background-image: url("/static/img/engeneering_sym.png"); }
+#abilities .INF {
+  background-image: url("/static/img/informatics_sym.png"); }
+#abilities .MED {
+  background-image: url("/static/img/medical_sym.png"); }
+#abilities .NAV {
+  background-image: url("/static/img/navigation_sym.png"); }
+#abilities .ability_separator {
+  display: inline-block; }
+
+#information .sound {
+  padding: 5px;
+  border: 1px solid;
+  float: left; }
+  #information .sound:hover {
+    cursor: pointer; }
+  #information .sound .status {
+    display: none; }
+  #information .sound .active {
+    display: block; }
+#information .on {
+  background-color: greenyellow; }
+#information .off {
+  background-color: red; }
+
+#error_box {
+  color: red; }
+
+.clear {
+  clear: both; }

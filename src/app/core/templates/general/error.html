@@ -1,0 +1,18 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<html>
+<head>
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_global.css" />
+    <title>Game</title>
+    {% include "general/tracking_piece.html" %}
+</head>
+<body>
+    <div id="error_box">
+        <center>
+            <h1>Error</h1>
+            <h3>{{cause}}</h3>
+        </center>
+    </div>
+</body>
+    {% include "general/tracking_piece.html" %}
+</html>

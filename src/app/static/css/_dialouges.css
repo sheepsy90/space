@@ -1,0 +1,40 @@
+.overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .overlay #welcomedialog {
+    top: -50px;
+    width: 500px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid black;
+    text-align: center; }
+
+.welcome {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  padding: 2px;
+  text-decoration: underline; }
+
+.sub {
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 20px; }
+  .sub .vivian {
+    width: 100px;
+    height: 140px;
+    float: left;
+    background-image: url("/static/img/vivian.png"); }
+  .sub p {
+    padding-left: 10px;
+    font-weight: normal;
+    font-style: italic;
+    text-decoration: none;
+    text-align: left; }

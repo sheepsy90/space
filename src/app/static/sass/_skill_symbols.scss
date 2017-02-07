@@ -1,0 +1,19 @@
+.PHY, .BIO, .CHE, .GEO, .ENG, .INF, .MED, .NAV,
+.N05, .N04, .N06, .N08, .N01, .N07, .N02, .N03, {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  text-align: center;
+  .amount {
+    margin-top: 6px;
+  }
+}
+
+.ENG, .N01 {background-image: url("/static/img/engeneering_sym.png")}
+.MED, .N02 {background-image: url("/static/img/medical_sym.png")}
+.NAV, .N03 {background-image: url("/static/img/navigation_sym.png")}
+.BIO, .N04 {background-image: url("/static/img/biology_sym.png")}
+.PHY, .N05 {background-image: url("/static/img/physics_sym.png")}
+.CHE, .N06 {background-image: url("/static/img/chemistry_sym.png")}
+.INF, .N07 {background-image: url("/static/img/informatics_sym.png")}
+.GEO, .N08 {background-image: url("/static/img/geology_sym.png")}

@@ -1,0 +1,12 @@
+/* Kompaktes Layout */
+.description, .reward, #abilities {
+  display: none;
+}
+
+#level, #name {
+  width: 50%;
+}
+
+* {
+    font-size: 24px;
+}

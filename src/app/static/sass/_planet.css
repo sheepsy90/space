@@ -1,0 +1,67 @@
+#open_missions {
+  background-color: white;
+  opacity: 0.8; }
+  #open_missions #open_missions_container .partyContainer {
+    padding: 5px;
+    border: 1px solid;
+    background-color: #8877dd;
+    margin: 5px;
+    text-align: right; }
+    #open_missions #open_missions_container .partyContainer .partyJoinButton {
+      text-decoration: none;
+      color: black;
+      display: inline-block;
+      border: 1px solid;
+      background-color: #417690;
+      padding: 3px;
+      border-radius: 5px; }
+      #open_missions #open_missions_container .partyContainer .partyJoinButton:hover {
+        background-color: dodgerblue;
+        cursor: pointer; }
+    #open_missions #open_missions_container .partyContainer .partyMissionName {
+      float: left;
+      color: black;
+      display: inline-block;
+      padding: 3px; }
+    #open_missions #open_missions_container .partyContainer .partyPplCount {
+      color: black;
+      display: inline-block;
+      border: 1px solid;
+      padding: 3px;
+      border-radius: 5px;
+      margin-right: 5px;
+      background-color: #5b80b2; }
+  #open_missions #open_missions_container .open {
+    background-color: lightgreen; }
+
+#available_missions {
+  background-color: white;
+  opacity: 0.8; }
+  #available_missions .missionContainer {
+    margin: 2px auto;
+    width: 90%;
+    padding: 5px;
+    background-color: white; }
+    #available_missions .missionContainer .name, #available_missions .missionContainer .tags, #available_missions .missionContainer .infoContainer {
+      border: 1px solid;
+      background-color: lightgrey; }
+    #available_missions .missionContainer .infoContainer .info {
+      float: left;
+      width: 25%; }
+    #available_missions .missionContainer .infoContainer .requirements {
+      width: 100%;
+      text-align: center; }
+    #available_missions .missionContainer .plan_mission {
+      float: right;
+      border: 1px solid;
+      padding: 4px;
+      background-color: lightgreen;
+      cursor: pointer; }
+      #available_missions .missionContainer .plan_mission a {
+        text-decoration: none;
+        color: black; }
+      #available_missions .missionContainer .plan_mission:hover {
+        background-color: greenyellow; }
+
+.clear {
+  clear: both; }

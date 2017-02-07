@@ -1,0 +1,45 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_landingpage.css" />
+    <script src="{{ STATIC_PREFIX }}js/api.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/jquery.bgswitcher.js"></script>
+    <title>Game</title>
+    {% include "general/tracking_piece.html" %}
+</head>
+<body>
+    <div id="landing_page">
+        <div id="heading">Science</div>
+        <div id="login">
+            <div class="login_style" id="login_box">
+                <form action="/ajax/login_user" method="post">
+                    <div><input id="user" required="required" name="user" type=text placeholder="Enter username.."></div>
+                    <div><input id="password" required="required" name="password" type=password placeholder="Enter password.."></div>
+                    <div class="inline_button"><input id="login_btn" value="Login" type=submit></div>
+                    <div class="inline_button"><input id="registration_btn" value="Sign Up" type="button"></div>
+                    <div id="csrf_token_container">{% csrf_token %}</div>
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div style="margin: 0 auto; color: white;">
+                {% include "landingpage/version_history.pyhtml" %}
+           </div>
+    </div>
+    {% include "general/footer.html" %}
+</body>
+<script>
+        $(document).ready(function() {
+            // Bind the Registration Button
+            $("#registration_btn").bind("click", function (){
+                window.location.href = "/view_registration_page/"
+            });
+
+            start_and_bind_audio();
+            start_bg_switcher();
+        });
+</script>
+</html>

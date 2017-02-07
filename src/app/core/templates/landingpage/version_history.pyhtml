@@ -1,0 +1,37 @@
+<div style="margin: 20px auto; color: white; ">
+<div style="margin: 0 auto; width: 50%;">
+<div style="font-size: 18px;">What is this?</div>
+<div style="padding: 4px; margin: 5px auto;  border: 1px solid white;">
+    This is a little browser game i am currently working on. You can make space missions together with your friends.
+    To get better at certain areas like engineering, medicine or navigation you need to get skill points in a
+    new kind of way.
+</div>
+</div>
+</div>
+<div style="margin: 20px auto; color: white; ">
+<div style="margin: 0 auto; width: 50%;">
+<div style="font-size: 18px;">Bugtracker</div>
+<div style="padding: 4px; margin: 5px auto;  border: 1px solid white;">
+    This game is of course currently under development so there will occur bugs. You can submit them
+    <a style="text-decoration: none; color: yellow;" href="http://redmine.bit-bots.de/projects/bugs_lootgame/">here</a>.
+</div>
+</div>
+</div>
+
+<div style="margin: 20px auto; color: white; ">
+<div style="margin: 0 auto; width: 50%;">
+<div style="font-size: 18px;">Release Notes</div>
+<div style="padding: 4px; margin: 5px auto;  border: 2px solid darkgrey;">
+    <div>Upcoming Version:</div>
+    <ul>
+        <li>Items ...</li>
+    </ul>
+</div>
+<div style="padding: 4px; margin: 5px auto;  border: 2px solid green;">
+    <div>Version 1:</div>
+    <ul>
+        <li>Planning Missions</li>
+        <li>Get Events on Missions</li>
+        <li>Take academy courses</li>
+    </ul>
+</div>

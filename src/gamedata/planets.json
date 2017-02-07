@@ -1,0 +1,47 @@
+[
+  {
+    "model": "core.Planets",
+    "pk": 1,
+    "fields": {
+      "name": "Earth",
+      "title": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.Planets",
+    "pk": 2,
+    "fields": {
+      "name": "Moon",
+      "title": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.Planets",
+    "pk": 3,
+    "fields": {
+      "name": "Mars",
+      "title": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.Planets",
+    "pk": 4,
+    "fields": {
+      "name": "Pluto",
+      "title": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.Planets",
+    "pk": 5,
+    "fields": {
+      "name": "Gliese 581d",
+      "title": "",
+      "description": ""
+    }
+  }
+]

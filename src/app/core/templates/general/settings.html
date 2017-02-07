@@ -1,0 +1,70 @@
+{% extends "general/parent_template.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block include %}
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_global.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="information">
+        <div style="margin: 8px 0; text-align: center">
+            <div style="width: 50%; display: inline-block">
+                <div style="background-color: white; border: 1px solid; padding: 10px; opacity: 0.7">
+                    <h4>Settings</h4>
+                    <div id="sound" class="sound {% if sound_status %} on{% else %} off{% endif %}">
+                        <div id="on" class="status{% if sound_status %} active{% endif %}">Sound on</div>
+                        <div id="off" class="status{% if not sound_status %} active{% endif %}">Sound off</div>
+                        <div id="state" hidden=true>{{ sound_state }}</div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <div id="csrf_token_container">{% csrf_token %}</div>
+    <script>
+        function change_sound_setting_state() {
+            $.ajax({
+              type: "POST",
+              url: "/switch_sound_setting_state/",
+              data: {csrfmiddlewaretoken: get_csrftoken()}
+            }).done(function( data ) {
+                update_sound_state(data);
+            });
+        }
+
+        function update_sound_state(data){
+            if(data["success"]){
+                var new_state = data["new_state"];
+                if (new_state == true){
+                    $("#on").addClass("active");
+                    $("#off").removeClass("active");
+                    $("#sound").removeClass("off").addClass("on");
+                    $("#sound_enabled").html("True");
+                }else{
+                    $("#on").removeClass("active");
+                    $("#off").addClass("active");
+                    $("#sound").addClass("off").removeClass("on");
+                    $("#sound_enabled").html("False");
+                }
+                audio_switch();
+            }
+        }
+
+        $(document).ready(function() {
+            start_bg_switcher();
+            start_and_bind_audio();
+
+            $("#sound").bind("click", function(){
+               change_sound_setting_state();
+            });
+
+        });
+    </script>
+{% endblock %}

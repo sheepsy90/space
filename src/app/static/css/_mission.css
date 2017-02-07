@@ -1,0 +1,197 @@
+#ongoing_mission {
+  margin-top: 5px; }
+  #ongoing_mission #controls {
+    float: left;
+    width: 29%;
+    background-color: rgba(255, 255, 255, 0.6); }
+    #ongoing_mission #controls #users {
+      border: 1px solid;
+      padding: 2px; }
+      #ongoing_mission #controls #users .user {
+        padding: 5px;
+        border: 1px solid;
+        background-color: #8877dd; }
+    #ongoing_mission #controls #mission_controls {
+      text-align: center;
+      border: 1px solid;
+      padding: 2px; }
+      #ongoing_mission #controls #mission_controls .control_buttons {
+        padding: 5px; }
+        #ongoing_mission #controls #mission_controls .control_buttons #leave_mission_button {
+          background-color: lightgreen;
+          border: 3px solid;
+          font-weight: bold;
+          color: black;
+          text-decoration: none;
+          padding: 2px; }
+          #ongoing_mission #controls #mission_controls .control_buttons #leave_mission_button:hover {
+            background-color: regreenyellowd;
+            cursor: pointer; }
+        #ongoing_mission #controls #mission_controls .control_buttons #start_mission_button {
+          background-color: lightgreen;
+          border: 3px solid;
+          font-weight: bold;
+          color: black;
+          text-decoration: none;
+          padding: 2px; }
+          #ongoing_mission #controls #mission_controls .control_buttons #start_mission_button:hover {
+            background-color: greenyellow;
+            cursor: pointer; }
+      #ongoing_mission #controls #mission_controls #finished {
+        background-color: lightgreen;
+        border: 3px solid;
+        font-weight: bold;
+        color: black;
+        text-decoration: none;
+        padding: 2px; }
+        #ongoing_mission #controls #mission_controls #finished:hover {
+          background-color: greenyellow;
+          cursor: pointer; }
+      #ongoing_mission #controls #mission_controls #mission_time {
+        padding: 5px; }
+    #ongoing_mission #controls #actionPointsContainer {
+      border: 1px solid;
+      padding: 2px;
+      text-align: center; }
+      #ongoing_mission #controls #actionPointsContainer .PHY, #ongoing_mission #controls #actionPointsContainer .BIO, #ongoing_mission #controls #actionPointsContainer .CHE, #ongoing_mission #controls #actionPointsContainer .GEO, #ongoing_mission #controls #actionPointsContainer .ENG, #ongoing_mission #controls #actionPointsContainer .INF, #ongoing_mission #controls #actionPointsContainer .MED, #ongoing_mission #controls #actionPointsContainer .NAV,
+      #ongoing_mission #controls #actionPointsContainer .N05, #ongoing_mission #controls #actionPointsContainer .N04, #ongoing_mission #controls #actionPointsContainer .N06, #ongoing_mission #controls #actionPointsContainer .N08, #ongoing_mission #controls #actionPointsContainer .N01, #ongoing_mission #controls #actionPointsContainer .N07, #ongoing_mission #controls #actionPointsContainer .N02, #ongoing_mission #controls #actionPointsContainer .N03 {
+        height: 32px;
+        width: 32px;
+        display: inline-block;
+        text-align: center; }
+        #ongoing_mission #controls #actionPointsContainer .PHY .amount, #ongoing_mission #controls #actionPointsContainer .BIO .amount, #ongoing_mission #controls #actionPointsContainer .CHE .amount, #ongoing_mission #controls #actionPointsContainer .GEO .amount, #ongoing_mission #controls #actionPointsContainer .ENG .amount, #ongoing_mission #controls #actionPointsContainer .INF .amount, #ongoing_mission #controls #actionPointsContainer .MED .amount, #ongoing_mission #controls #actionPointsContainer .NAV .amount,
+        #ongoing_mission #controls #actionPointsContainer .N05 .amount, #ongoing_mission #controls #actionPointsContainer .N04 .amount, #ongoing_mission #controls #actionPointsContainer .N06 .amount, #ongoing_mission #controls #actionPointsContainer .N08 .amount, #ongoing_mission #controls #actionPointsContainer .N01 .amount, #ongoing_mission #controls #actionPointsContainer .N07 .amount, #ongoing_mission #controls #actionPointsContainer .N02 .amount, #ongoing_mission #controls #actionPointsContainer .N03 .amount {
+          margin-top: 6px; }
+      #ongoing_mission #controls #actionPointsContainer .ENG, #ongoing_mission #controls #actionPointsContainer .N01 {
+        background-image: url("/static/img/engeneering_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .MED, #ongoing_mission #controls #actionPointsContainer .N02 {
+        background-image: url("/static/img/medical_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .NAV, #ongoing_mission #controls #actionPointsContainer .N03 {
+        background-image: url("/static/img/navigation_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .BIO, #ongoing_mission #controls #actionPointsContainer .N04 {
+        background-image: url("/static/img/biology_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .PHY, #ongoing_mission #controls #actionPointsContainer .N05 {
+        background-image: url("/static/img/physics_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .CHE, #ongoing_mission #controls #actionPointsContainer .N06 {
+        background-image: url("/static/img/chemistry_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .INF, #ongoing_mission #controls #actionPointsContainer .N07 {
+        background-image: url("/static/img/informatics_sym.png"); }
+      #ongoing_mission #controls #actionPointsContainer .GEO, #ongoing_mission #controls #actionPointsContainer .N08 {
+        background-image: url("/static/img/geology_sym.png"); }
+  #ongoing_mission #events {
+    float: right;
+    width: 70%; }
+    #ongoing_mission #events .eventContainer {
+      margin-bottom: 8px;
+      padding: 5px;
+      border: 1px solid;
+      background-color: rgba(255, 255, 255, 0.6); }
+      #ongoing_mission #events .eventContainer .PHY, #ongoing_mission #events .eventContainer .BIO, #ongoing_mission #events .eventContainer .CHE, #ongoing_mission #events .eventContainer .GEO, #ongoing_mission #events .eventContainer .ENG, #ongoing_mission #events .eventContainer .INF, #ongoing_mission #events .eventContainer .MED, #ongoing_mission #events .eventContainer .NAV,
+      #ongoing_mission #events .eventContainer .N05, #ongoing_mission #events .eventContainer .N04, #ongoing_mission #events .eventContainer .N06, #ongoing_mission #events .eventContainer .N08, #ongoing_mission #events .eventContainer .N01, #ongoing_mission #events .eventContainer .N07, #ongoing_mission #events .eventContainer .N02, #ongoing_mission #events .eventContainer .N03 {
+        height: 32px;
+        width: 32px;
+        display: inline-block;
+        text-align: center; }
+        #ongoing_mission #events .eventContainer .PHY .amount, #ongoing_mission #events .eventContainer .BIO .amount, #ongoing_mission #events .eventContainer .CHE .amount, #ongoing_mission #events .eventContainer .GEO .amount, #ongoing_mission #events .eventContainer .ENG .amount, #ongoing_mission #events .eventContainer .INF .amount, #ongoing_mission #events .eventContainer .MED .amount, #ongoing_mission #events .eventContainer .NAV .amount,
+        #ongoing_mission #events .eventContainer .N05 .amount, #ongoing_mission #events .eventContainer .N04 .amount, #ongoing_mission #events .eventContainer .N06 .amount, #ongoing_mission #events .eventContainer .N08 .amount, #ongoing_mission #events .eventContainer .N01 .amount, #ongoing_mission #events .eventContainer .N07 .amount, #ongoing_mission #events .eventContainer .N02 .amount, #ongoing_mission #events .eventContainer .N03 .amount {
+          margin-top: 6px; }
+      #ongoing_mission #events .eventContainer .ENG, #ongoing_mission #events .eventContainer .N01 {
+        background-image: url("/static/img/engeneering_sym.png"); }
+      #ongoing_mission #events .eventContainer .MED, #ongoing_mission #events .eventContainer .N02 {
+        background-image: url("/static/img/medical_sym.png"); }
+      #ongoing_mission #events .eventContainer .NAV, #ongoing_mission #events .eventContainer .N03 {
+        background-image: url("/static/img/navigation_sym.png"); }
+      #ongoing_mission #events .eventContainer .BIO, #ongoing_mission #events .eventContainer .N04 {
+        background-image: url("/static/img/biology_sym.png"); }
+      #ongoing_mission #events .eventContainer .PHY, #ongoing_mission #events .eventContainer .N05 {
+        background-image: url("/static/img/physics_sym.png"); }
+      #ongoing_mission #events .eventContainer .CHE, #ongoing_mission #events .eventContainer .N06 {
+        background-image: url("/static/img/chemistry_sym.png"); }
+      #ongoing_mission #events .eventContainer .INF, #ongoing_mission #events .eventContainer .N07 {
+        background-image: url("/static/img/informatics_sym.png"); }
+      #ongoing_mission #events .eventContainer .GEO, #ongoing_mission #events .eventContainer .N08 {
+        background-image: url("/static/img/geology_sym.png"); }
+      #ongoing_mission #events .eventContainer .eventInfo {
+        float: left; }
+        #ongoing_mission #events .eventContainer .eventInfo .eventDescription {
+          font-size: 20px;
+          font-weight: bold; }
+      #ongoing_mission #events .eventContainer .needContainer {
+        float: right; }
+      #ongoing_mission #events .eventContainer .work_on_button {
+        float: right;
+        width: 64px;
+        height: 64px;
+        margin-right: 4px;
+        margin-left: 4px;
+        background-image: url("/static/img/act.png"); }
+        #ongoing_mission #events .eventContainer .work_on_button:hover {
+          background-image: url("/static/img/act_hover.png");
+          cursor: pointer; }
+      #ongoing_mission #events .eventContainer .remaining_act_time {
+        float: right;
+        width: 64px;
+        height: 64px;
+        background-image: url("/static/img/timeleft.png");
+        text-align: center; }
+        #ongoing_mission #events .eventContainer .remaining_act_time .remainingTimeSpan {
+          font-size: 46px;
+          margin-top: 5px;
+          display: inline-block;
+          letter-spacing: 2px;
+          padding-left: 1px; }
+    #ongoing_mission #events .eventHappened {
+      background-color: #f44; }
+    #ongoing_mission #events .eventPrevented {
+      background-color: lightgreen; }
+
+.clear {
+  clear: both; }
+
+#completed_mission {
+  text-align: center;
+  padding: 5px; }
+  #completed_mission .content_border {
+    width: 50%;
+    display: inline-block; }
+    #completed_mission .content_border #death {
+      background-image: url("/static/img/mission_failed.png");
+      width: 400px;
+      height: 400px;
+      display: inline-block; }
+    #completed_mission .content_border .reward_event_element {
+      border: 1px solid;
+      padding: 5px;
+      margin: 5px;
+      width: 100%;
+      background-color: #fffccf;
+      text-align: center;
+      background-color: dimgrey; }
+      #completed_mission .content_border .reward_event_element .info_element {
+        display: inline-block; }
+    #completed_mission .content_border .achieved {
+      background-color: greenyellow;
+      text-decoration: none;
+      text-align: center; }
+    #completed_mission .content_border .reward_event_element_basic {
+      border: 1px solid;
+      padding: 5px;
+      margin: 5px;
+      width: 100%;
+      background-color: #f4f379;
+      text-align: center; }
+      #completed_mission .content_border .reward_event_element_basic .info_element {
+        display: inline-block; }
+    #completed_mission .content_border #back_to_planet_btn {
+      border: 1px solid;
+      padding: 5px;
+      margin: 5px;
+      background-color: #fffccf;
+      text-align: center;
+      width: 20%;
+      margin: 0 auto; }
+      #completed_mission .content_border #back_to_planet_btn div {
+        display: inline-block; }
+      #completed_mission .content_border #back_to_planet_btn:hover {
+        cursor: pointer;
+        background-color: #f4f379; }

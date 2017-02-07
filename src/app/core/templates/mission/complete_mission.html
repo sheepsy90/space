@@ -1,0 +1,47 @@
+{% extends "general/parent_template.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block include %}
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_mission.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="completed_mission">
+        <div class="content_border">
+            <div class="reward_event_element_basic">
+                <div class="info_element">{{ complete_mission_ao.basic_reward_text }}</div>
+            </div>
+            {% for element in complete_mission_ao.event_reward_list %}
+                <div class="reward_event_element{% if element.achieved %} achieved{% endif %}">
+                    <div class="info_element">{{ element.name }}</div>
+                    <div class="info_element"> - </div>
+                    <div class="info_element">{{ element.reward_text }}</div>
+                    <div class="info_element">{{ element.reward_amount }}</div>
+                    <div class="info_element">{{ element.reward_type }}</div>
+                </div>
+            {% endfor %}
+            {% if complete_mission_ao.death %}
+                <div id="death"></div>
+            {% endif %}
+
+            <div id="back_to_planet_btn">
+                <div>Back to Planet</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>// A $( document ).ready() block.
+    $( document ).ready(function() {
+        start_and_bind_audio();
+        start_bg_switcher();
+        $("#back_to_planet_btn").bind("click", function(){
+            window.location.href = "/planet/";
+        });
+    });
+</script>
+{% endblock %}

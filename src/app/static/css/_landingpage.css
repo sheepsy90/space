@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+  background-color: black;
+  background-repeat: repeat-y;
+  height: auto; }
+
+#landing_page #heading {
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold; }
+#landing_page #login .login_style {
+  text-align: center; }
+  #landing_page #login .login_style form {
+    display: inline-block; }
+  #landing_page #login .login_style .inline_button {
+    display: inline; }

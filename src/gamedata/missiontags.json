@@ -1,0 +1,42 @@
+[
+  {
+    "model": "core.MissionTags",
+    "pk": 1,
+    "fields": {
+      "key": "ASTEROIDS",
+      "visible": true
+    }
+  },
+  {
+    "model": "core.MissionTags",
+    "pk": 2,
+    "fields": {
+      "key": "MALFUNCTION",
+      "visible": true
+    }
+  },
+  {
+    "model": "core.MissionTags",
+    "pk": 3,
+    "fields": {
+      "key": "SOLAR_STORM",
+      "visible": true
+    }
+  },
+  {
+    "model": "core.MissionTags",
+    "pk": 4,
+    "fields": {
+      "key": "INJURY",
+      "visible": true
+    }
+  },
+  {
+    "model": "core.MissionTags",
+    "pk": 5,
+    "fields": {
+      "key": "PIRATES",
+      "visible": true
+    }
+  }
+]

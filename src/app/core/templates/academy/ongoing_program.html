@@ -1,0 +1,105 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_academy.css" />
+        <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+        <title>Game</title>
+        {% include "general/tracking_piece.html" %}
+    </head>
+    <body style="margin: 0; background-color: black">
+        <div id="academy_program">
+            {%  if tutorial %}
+                <div id="tutorial_area">
+                    <div>
+                    {% autoescape off %}
+                        {{ tutorial_text }}
+                    {% endautoescape %}
+                    </div>
+                </div>
+                <div id="finish_tutorial_button">
+                    <a href="/finish_tutorial">
+                        <div>Continue to Exam</div>
+                    </a>
+                </div>
+
+            {% else %}
+
+                <div class="question">
+                    <div class="question_text">
+                        {{ random_question.question_text }}
+                    </div>
+                </div>
+                <div class="answers">
+                    <input hidden=true id="question_id" value="{{ random_question.question_id }}"/>
+
+                    <div id="answer_{{ random_question.answer_1_id }}" class="answerContainer">
+                        {{ random_question.answer_1 }}
+                    </div>
+                    <input type=text hidden=false value="{{ random_question.answer_1_id }}"/>
+
+                    <div id="answer_{{ random_question.answer_2_id }}" class="answerContainer">
+                        {{ random_question.answer_2 }}
+                    </div>
+                    <input type=text hidden=false value="{{ random_question.answer_2_id }}"/>
+
+                    <div id="answer_{{ random_question.answer_3_id }}" class="answerContainer">
+                        {{ random_question.answer_3 }}
+                    </div>
+                    <input type=text hidden=false value="{{ random_question.answer_3_id }}"/>
+
+                    <div id="answer_{{ random_question.answer_4_id }}" class="answerContainer">
+                        {{ random_question.answer_4 }}
+                    </div>
+                    <input type=text hidden=false value="{{ random_question.answer_4_id }}"/>
+                </div>
+            {% endif %}
+        </div>
+        {% include "general/footer.html" %}
+    </body>
+    <div id="csrf_token_container">{% csrf_token %}</div>
+    <script>
+        $(document).ready(function() {
+            $(".answerContainer").bind("click", function(){
+                var answer_id = $(this).next().val();
+                var question_id = $("#question_id").val();
+                check_answer_correctness(question_id, answer_id);
+            });
+        });
+
+        function get_csrftoken(){
+            return $("#csrf_token_container > input").val();
+        }
+
+        function check_answer_correctness(question_id, answer_id){
+            $.ajax({
+              type: "POST",
+              url: "/answer_question/",
+              data: {csrfmiddlewaretoken: get_csrftoken(), question_id: question_id, answer_id: answer_id}
+            }).done(function( data ) {
+                handle_check_answer_response(data, answer_id);
+            });
+        }
+
+        function switch_to_next() {
+            window.location.href = "/ongoing_program/"
+        }
+
+        function handle_check_answer_response(data, answer_id){
+
+
+            if(data["success"]){
+                if (data["answer_correct"]){
+                    $("#answer_" + answer_id).css("backgroundColor", "green");
+                }else{
+                    $("#answer_" + answer_id).css("backgroundColor", "red");
+                }
+                setTimeout(switch_to_next, 400)
+            }else{
+                alert("Error!");
+            }
+        }
+
+    </script>
+</html>

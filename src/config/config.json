@@ -1,0 +1,7 @@
+{
+    "ROOT" : "/home/sheepy/repositorys/space/src/app",
+    "DB-PATH" : "/home/sheepy/repositorys/space/src/database/db.sqlite3",
+    "LOG-PATH" : "/home/sheepy/repositorys/space/src/logging/",
+    "TRACKING-ACTIVE" : false,
+    "TRACKING-CODE" : "INVALID"
+}

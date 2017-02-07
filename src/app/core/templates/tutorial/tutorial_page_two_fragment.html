@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="{{STATIC_PREFIX}}css/_dialouges.css" />
+<div id="welcome" class="overlay" style="visible: true;">
+    <div id="welcomedialog">
+      <div style="height: 460px; padding: 5px;">
+        <div class="sub">
+            <!--<div style="float: left">
+                Vivian Dorner<br>
+                Science Academy<br>
+                Langsington<br>
+                14.07.2021<br>
+            </div>-->
+            <div class="vivian">
+
+            </div>
+            <div style="float: right">
+                Vivian Dorner<br>
+                Science Academy<br>
+                Langsington<br>
+                14.07.2021<br>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="sub">Dear young scientist,
+            <p>as you may have heard - we are recruiting young new talents to join us at
+                our adventures all around the world. There is always the need for exploration and we
+                would like you to join our programs.<br><br>
+                There is a lot to explore on this planet already, but you can also join our space program and
+                make adventures further away. Be aware of the fact that there are missions we can only offer
+                a trip without return.<br><br>
+                When joining missions you need your talents to overcome problems. Our science committee
+                has marked the missions with keywords, showing the dangers and possible problems that you could
+                face.<br><br>
+            </p>
+        </div>
+        <div class="sub">Best regards
+            <p>Vivian Dorner</p>
+        </div>
+      </div>
+      <div style="text-align: right;"><br>
+      <div style="padding: 5px;">
+          <input id="explanaition" type=checkbox>Mark as read</input>
+          <input id="welcome_dialog_submit" type=button value="Close"></input>
+      </div>
+      </div>
+    </div>
+    <script>
+        $("#welcome_dialog_submit").bind("click", function(){
+            hide_Dialog("welcome");
+        });
+
+        function hide_Dialog(dialogename){
+            $("#" + dialogename).hide();
+            if($("#explanaition").attr('checked')){
+                $.ajax({
+                  type: "POST",
+                  url: "/tutorial_confirm/",
+                  data: {csrfmiddlewaretoken: get_csrftoken()}
+                });
+            }
+        }
+
+    </script>
+</div>

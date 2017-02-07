@@ -1,0 +1,32 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_academy.css" />
+    <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+</head>
+<body style="background-color: black">
+    <div id="finished_program">
+        <div id="rewards">
+            <div id="description">
+                {{ finishProgramAO.description }}
+            </div>
+
+            <div id="reward">
+                {% for reward in finishProgramAO.list_of_rewards %}
+                    <div class="{{ reward.category.name|slice:":3" }}">
+                        <div class="amount">{{ reward.amount }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="clear"></div>
+            <a href="/planet">
+                <div class="continue">Continue</div>
+            </a>
+        </div>
+    </div>
+    {% include "general/footer.html" %}
+</body>
+</html>

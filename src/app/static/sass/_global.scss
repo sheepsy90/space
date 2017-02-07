@@ -1,0 +1,179 @@
+
+  html {
+
+  }
+
+  table {
+      width: 100%;
+      border: none !important;
+      background-color: grey;
+  }
+
+  table thead td {
+      background-color: grey;
+      color: black;
+      text-align: center;
+      border-bottom: 1px solid;
+  }
+
+  .bordered {
+      border: 1px solid;
+  }
+
+  .entry td {
+      text-align: center;
+  }
+
+  .even {
+      background-color: #444;
+  }
+
+  .odd {
+      background-color: #666;
+  }
+
+  body {
+    margin: 0px;
+    background-color: black;
+    background-repeat: repeat-y;
+    height: auto;
+  }
+
+
+
+  #header {
+    a {
+      margin: 0;
+      text-decoration: none;
+      color: black;
+    }
+
+    #header_academy, #header_planet {
+      width: 128px;
+      height: 32px;
+      float: left;
+    }
+    #header_academy {
+      background-image: url("/static/img/academy.png");
+      &:hover{
+        background-image: url("/static/img/academy_hover.png");
+      }
+    }
+    #header_planet {
+      background-image: url("/static/img/planet.png");
+      &:hover{
+        background-image: url("/static/img/planet_hover.png");
+      }
+    }
+
+    .header_element_controls {
+      display: inline-block;
+      float: right;
+      text-align: center;
+      .audio_symbol {
+        background-image: url("/static/img/audio.png");
+        width: 32px;
+        height: 32px;
+        float: right;
+      }
+      .settings {
+        background-image: url("/static/img/settings.png");
+        width: 32px;
+        height: 32px;
+        float: right;
+      }
+      .Earth, .Mars {
+        width: 96px;
+        height: 32px;
+        float: right;
+      }
+      .Earth {background-image: url("/static/img/LocationEarth.png")}
+      .Mars {background-image: url("/static/img/LocationMars.png")}
+
+      .logout {
+        background-image: url("/static/img/logout.png");
+        width: 32px;
+        height: 32px;
+        float: right;
+      }
+      .muted {
+        background-image: url("/static/img/audio_mute.png");
+      }
+    }
+
+  }
+
+  .userinfo {
+      border: 1px solid;
+      margin-top: 2px;
+      font-size: 0px;
+    padding: 5px;
+  }
+
+  .userinfo .detail {
+      display: inline-block;
+      font-size: 14px;
+      text-align: center;
+  }
+
+  #level,  #name{
+      width: 20%;
+  }
+
+  #abilities{
+      width: 60%;
+  }
+
+  #abilities {
+    .PHY, .BIO, .CHE, .GEO, .ENG, .INF, .MED, .NAV {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      .amount {
+        margin-top: 4px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    .PHY {background-image: url("/static/img/physics_sym.png")}
+    .BIO {background-image: url("/static/img/biology_sym.png")}
+    .CHE {background-image: url("/static/img/chemistry_sym.png")}
+    .GEO {background-image: url("/static/img/geology_sym.png")}
+    .ENG {background-image: url("/static/img/engeneering_sym.png")}
+    .INF {background-image: url("/static/img/informatics_sym.png")}
+    .MED {background-image: url("/static/img/medical_sym.png")}
+    .NAV {background-image: url("/static/img/navigation_sym.png")}
+
+    .ability_separator {
+      display: inline-block;
+    }
+  }
+
+#information {
+  .sound {
+    padding: 5px;
+    border: 1px solid;
+    float: left;
+    &:hover{
+      cursor: pointer;
+    }
+    .status {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+  }
+  .on {background-color: greenyellow;}
+  .off {background-color: red};
+
+}
+
+
+#error_box {
+  color: red;
+}
+
+.clear {
+  clear: both;
+}

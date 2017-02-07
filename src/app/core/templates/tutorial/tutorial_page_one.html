@@ -1,0 +1,75 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_tutorial.css" />
+    <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/api.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/jquery.bgswitcher.js"></script>
+    <title>{% block title %}My amazing site{% endblock %}</title>
+    {% include "general/tracking_piece.html" %}
+</head>
+<body class="transition">
+    <div id="tutorial">
+        <div id=tutorial_area>
+            <div class="heading">Welcome</div>
+            <p>The science foundation is offering you a fellowship for one program at the university!<br>
+               There are several fields available, each needed for different research areas or is necessary
+                to support exploratory missions.</p>
+
+            <p>Choose one from the below program categories!</p>
+
+            <form id="tutorial_form" method="POST" action="/choose_academy_program_in_tutorial/">
+                <div id="academy_symbols">
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Physics</div>
+                        <div class="PHY"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Biology</div>
+                        <div class="BIO"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Chemistry</div>
+                        <div class="CHE"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Geology</div>
+                        <div class="GEO"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Engineering</div>
+                        <div class="ENG"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Informatics</div>
+                        <div class="INF"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Medicine</div>
+                        <div class="MED"></div>
+                    </div>
+                    <div class="academy_symbol_container">
+                        <div class="full_name">Navigation</div>
+                        <div class="NAV"></div>
+                    </div>
+                </div>
+                <input type=text hidden=true name="program" id="program" value=""/>
+                <div id="csrf_token_container">{% csrf_token %}</div>
+            </form>
+        </div>
+    </div>
+    {% include "general/footer.html" %}
+</body>
+<script>
+    $(document).ready(function() {
+        start_bg_switcher();
+        $(".academy_symbol_container").bind("click", function(){
+            var value = $(this).children().next().attr("class");
+            $("#program").val(value);
+            $("#tutorial_form").submit();
+        });
+    });
+</script>
+</html>

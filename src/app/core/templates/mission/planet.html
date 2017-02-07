@@ -1,0 +1,182 @@
+{% extends "general/parent_template.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block include %}
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_planet.css" />
+{% endblock %}
+
+{% block content %}
+    <div id="planet" style="margin-top: 10px; padding: 10px;">
+        <div style="font-size: 0">
+            <div style="width: 50%; float: left; font-size: 14px; text-align: center">
+                <div id="open_missions"style="border: 1px solid; text-align: center">
+                    <h4>Available Party's</h4>
+                    <div id="open_missions_container"></div>
+                </div>
+            </div>
+            <div style="width: 50%;float: left; font-size: 14px; text-align: center">
+                <div id="available_missions" style="border: 1px solid">
+                    <h4>Near Planets or Targets</h4>
+                    {% for element in missions %}
+                        <div class="missionContainer" >
+                            <div class="name">{{ element.mission.name }}</div>
+                                {%  if element.precondition_xp %}
+                                    <div class="infoContainer">
+                                        <div class="info">Duration (Days)</div>
+                                        <div class="info">Reward ($)</div>
+                                        <div class="info">Reward (XP)</div>
+                                        <div class="info">Target Planet</div>
+                                        <div class="clear"></div>
+
+                                        <div class="info">{{ element.mission.basic_time }}</div>
+                                        <div class="info">{{ element.mission.reward_money }}</div>
+                                        <div class="info">{{ element.mission.reward_xp }}</div>
+                                        <div class="info">
+                                            {% if element.mission.target_planet %}
+                                                {{ element.mission.target_planet.name }}
+                                            {% else %}
+                                                None
+                                            {% endif %}
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="tags">
+                                        {% for tag in element.tags %}
+                                            {{ tag.mt.key }}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="plan_mission">
+                                        <div onclick="handle_prepare_mission({{ element.mission.id }})">Plan Mission</div>
+                                    </div>
+                                {% else %}
+                                    <div class="infoContainer">
+                                        <div class="requirements">{{ element.mission.need_xp }} Experience required!</div>
+                                    </div>
+                                {% endif %}
+
+                            <div style="clear: both;"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    {% if tutorial_state_1 %}
+        {% include "tutorial/tutorial_page_two_fragment.html" %}
+    {% endif %}
+{% endblock %}
+
+
+{% block script %}
+    <div id="csrf_token_container">{% csrf_token %}</div>
+    <script>
+        $(document).ready(function() {
+            $("#header_planet").addClass("active");
+            setInterval(pollAvailableMissions, 5000);
+            pollAvailableMissions();
+
+            $(".plan_mission > a").click(function(){
+               play_sound("/static/music/mission_join.wav")
+            });
+
+            start_and_bind_audio();
+            start_bg_switcher();
+        });
+
+
+        function handle_prepare_mission(mission_id){
+            play_sound("/static/music/mission_join.mp3");
+            window.location.href = "/prepare_mission/" + mission_id + "/";
+        }
+
+
+        function pollAvailableMissions(){
+            $.ajax({
+              type: "POST",
+              url: "/poll_available_missions/",
+              data: {csrfmiddlewaretoken: get_csrftoken()}
+            }).done(function( data ) {
+                updateAvailableMissionList(data);
+            });
+        }
+
+        function get_csrftoken(){
+            return $("#csrf_token_container > input").val();
+        }
+
+
+        function updateParty(id, started, name, player_count) {
+            $("#party_" + id).removeClass("marker");
+            if (started){
+                $("#party_" + id).addClass("started").removeClass("open");
+            }else{
+                $("#party_" + id).removeClass("started").addClass("open");
+            }
+            $("#party_ppl_count_" + id).html("Players: " + player_count);
+        }
+
+
+
+
+        function createParty(id, started, name, player_count) {
+
+            var partyContainer = $("<div></div>");
+            partyContainer.attr("id", "party_" + id);
+            partyContainer.addClass("partyContainer");
+
+
+            var party_mission_name = $("<div></div>");
+            party_mission_name.attr("id", "party_mission_name_" + id);
+            party_mission_name.addClass("partyMissionName");
+            party_mission_name.html(name);
+
+            var party_ppl_count = $("<div></div>");
+            party_ppl_count.attr("id", "party_ppl_count_" + id);
+            party_ppl_count.addClass("partyPplCount");
+            party_ppl_count.html("Players: " + player_count);
+
+            var join_button = $("<div></div>");
+            if (started){
+                join_button.attr("href", "#");
+                join_button.html("Already Started");
+                partyContainer.addClass("started");
+            }else{
+                join_button.click(function(){
+                    window.location.href = "join_mission/" + id + "/";
+                });
+                join_button.html("Join");
+                partyContainer.addClass("open");
+            }
+            join_button.addClass("partyJoinButton");
+
+            partyContainer.append(party_mission_name);
+            partyContainer.append(party_ppl_count);
+            partyContainer.append(join_button);
+
+            $('#open_missions_container').append(partyContainer);
+
+        }
+
+        function updateAvailableMissionList(data) {
+            $("#open_missions_container > div").addClass("marker");
+            for (e in data["data"]){
+                var element = data["data"][e];
+                var id = element["id"];
+                var started = element["started"];
+                var name = element["name"];
+                var player_count = element["player_count"];
+
+                if (!$("#party_" + id).length){
+                    createParty(id, started, name, player_count);
+                }else{
+                    updateParty(id, started, name, player_count);
+                }
+            }
+            $("#open_missions_container > .marker").remove();
+        }
+
+    </script>
+{% endblock %}

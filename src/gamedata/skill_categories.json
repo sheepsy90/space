@@ -1,0 +1,58 @@
+[
+  {
+    "model": "core.SkillCategory",
+    "pk": 1,
+    "fields": {
+      "name": "ENGINEERING"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 2,
+    "fields": {
+      "name": "MEDICAL"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 3,
+    "fields": {
+      "name": "NAVIGATION"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 4,
+    "fields": {
+      "name": "BIOLOGY"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 5,
+    "fields": {
+      "name": "PHYSICS"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 6,
+    "fields": {
+      "name": "CHEMISTRY"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 7,
+    "fields": {
+      "name": "INFORMATICS"
+    }
+  },
+  {
+    "model": "core.SkillCategory",
+    "pk": 8,
+    "fields": {
+      "name": "GEOLOGY"
+    }
+  }
+]

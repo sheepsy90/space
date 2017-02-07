@@ -1,0 +1,64 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{STATIC_PREFIX}}css/_global.css" />
+    <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/api.js"></script>
+    <script src="{{ STATIC_PREFIX }}js/jquery.bgswitcher.js"></script>
+    <title>{% block title %}My amazing site{% endblock %}</title>
+    {% include "general/tracking_piece.html" %}
+    {% block include %}{% endblock %}
+</head>
+<body style="margin:0" class="transition">
+    <div id="header">
+        <div style="width: 100%;">
+            <a href="/planet">
+                <div id="header_planet"></div>
+            </a>
+            <a href="/academy">
+                <div id="header_academy"></div>
+            </a>
+            <div id="header_controls" class="header_element_controls">
+                 <div style="border: 1px solid;">
+                     <a href="/settings">
+                        <div id="settings" class="settings"></div>
+                     </a>
+                     <div id="audio_switch" class="audio_symbol">
+                         <div id="sound_enabled" hidden=true>{{ general_info.sound_enabled }}</div>
+                     </div>
+                     <a href="/logout">
+                         <div id="logout" class="logout"></div>
+                     </a>
+                     <div id="current_location" class="{{ general_info.location_name }}"></div>
+                     <div class="clear"></div>
+                 </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div style="width: 100%; background-color: #fff;">
+            <div class="userinfo">
+                <div id="name" class="detail">{{ general_info.username }}</div>
+                <div id="abilities" class="detail">
+                    {% for element in general_info.action_points %}
+                        <div class="{{ element.name }}">
+                            <div class="amount">{{ element.amount }}</div>
+                        </div>
+                        {% if not forloop.last %}
+                            <div class="ability_separator"> - </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="level" class="detail">{{ general_info.level }} XP - {{ general_info.money }} $</div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    {% include "general/footer.html" %}
+</body>
+{% block script %}{% endblock %}
+</html>
